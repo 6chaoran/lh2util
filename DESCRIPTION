@@ -21,5 +21,10 @@ Imports:
     rlang,
     logging,
     stringr,
-    tidyr
+    tidyr,
+    knitr,
+    kableExtra,
+    DT,
+    data.table,
+    scales
 RoxygenNote: 7.1.1

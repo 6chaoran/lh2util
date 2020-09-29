@@ -17,10 +17,6 @@ NULL
 util.init.logger <- function(logger = "", level = 'INFO',
                              log.file = NULL, reset.log = TRUE){
 
-  if(!require(logging)){
-    stop('[logging] package is not installed')
-  }
-
   logReset()
 
   basicConfig(level = level)
@@ -40,8 +36,9 @@ util.init.logger <- function(logger = "", level = 'INFO',
 #' @examples
 #' util.init.dir('./tmp1/')
 #' util.init.dir('./tmp2/text.txt')
+#' unlink('tmp1', recursive = T)
+#' unlink('tmp2', recursive = T)
 #' @export
-
 util.init.dir <- function(path){
 
   if(grepl('/$', path)){
@@ -80,4 +77,16 @@ util.file.summ <- function(dir){
     unite("Received Date", a:b, sep = '/')
 
   file.summ
+}
+
+#' util.lh2.fill
+#' 
+#' default color code
+#' 
+#' @return color code
+#' @export
+#' @examples 
+#' util.lh2.fill()
+util.lh2.fill <- function(){
+  '#008B8B'
 }
