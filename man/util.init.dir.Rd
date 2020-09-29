@@ -6,12 +6,15 @@
 \usage{
 util.init.dir(path)
 }
+\arguments{
+\item{path}{directory/file to be created}
+}
 \description{
 create a directory/file if it doesn't exist
 }
 \examples{
 util.init.dir('./tmp1/')
 util.init.dir('./tmp2/text.txt')
-unlink('tmp1', recursive = T)
-unlink('tmp2', recursive = T)
+unlink('tmp1', recursive = TRUE)
+unlink('tmp2', recursive = TRUE)
 }

@@ -13,6 +13,7 @@ NULL
 #' @param x input text
 #' @param wrap.len the max of string length before adding line break
 #' @param br line break separator
+#' @return character
 #' @export
 #' @examples 
 #' x <- paste(rep('a',20), collapse = '')
@@ -35,6 +36,16 @@ util.text.wrap <- function(x, wrap.len = 50, br = '<br>'){
 #' visualize table using kable package
 #' 
 #' @param df input data.frame
+#' @param convert_pct boolean, TRUE -> convert number to percent if possible
+#' @param accuracy decimal for percentage, e.g. 1/0.1/0.01
+#' @param full_width boolean, TRUE -> full width table
+#' @param escape boolean, TRUE escape html tags
+#' @param caption character, caption of the table
+#' @param align character, a combined string of text alignment. e.g. 'lcrr' for 4 columns
+#' @param digits int, number of decimal digits to keep
+#' @param position {'left','right','float_left','center'}
+#' @param pretty.header boolean, TRUE -> colored header
+#' @param ... extra params from kable_styling function
 #' @return rendered html table
 #' @export
 #' @examples 
@@ -94,6 +105,15 @@ util.vis.kable <- function(df, convert_pct = F,
 #' visualize table using kable package
 #' 
 #' @param df input data.frame
+#' @param type character, {'buttons','scroll-y'}
+#' @param dom character, a combined string to indicate table elements
+#' @param options list, extra options from `DT` js package
+#' @param scrollY int, number of pixels to the scrollable window
+#' @param rownames boolean, TRUE -> show rowname of table
+#' @param filter character, {'none','top','bottom'}, position of filter
+#' @param background.color character, header color
+#' @param pretty.header boolean, TRUE -> enable colored header
+#' @param ... extra params from `datatable` function
 #' @return rendered html table
 #' @export
 #' @examples 

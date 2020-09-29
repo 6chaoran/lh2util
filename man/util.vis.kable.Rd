@@ -20,6 +20,26 @@ util.vis.kable(
 }
 \arguments{
 \item{df}{input data.frame}
+
+\item{convert_pct}{boolean, TRUE -> convert number to percent if possible}
+
+\item{accuracy}{decimal for percentage, e.g. 1/0.1/0.01}
+
+\item{full_width}{boolean, TRUE -> full width table}
+
+\item{escape}{boolean, TRUE escape html tags}
+
+\item{caption}{character, caption of the table}
+
+\item{align}{character, a combined string of text alignment. e.g. 'lcrr' for 4 columns}
+
+\item{digits}{int, number of decimal digits to keep}
+
+\item{position}{{'left','right','float_left','center'}}
+
+\item{pretty.header}{boolean, TRUE -> colored header}
+
+\item{...}{extra params from kable_styling function}
 }
 \value{
 rendered html table

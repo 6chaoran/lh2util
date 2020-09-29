@@ -6,6 +6,12 @@
 \usage{
 util.file.summ(dir)
 }
+\arguments{
+\item{dir}{directory to be summarized}
+}
+\value{
+data.frame
+}
 \description{
 output the file summary from bash command `ls`
 }

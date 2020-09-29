@@ -10,12 +10,21 @@ NULL
 #'
 #' initiator for logger functions
 #'
+#' @param logger name of logger
+#' @param level The logging level of the root logger.
+#' @param log.file external path of log file
+#' @param reset.log boolean. TRUE -> reset logger
 #' @examples
 #' util.init.logger()
+#' logging::loginfo('this is an info')
+#' logging::logwarn('this is a warning')
+#' logging::logerror('this is an error')
 #' @export
 #'
-util.init.logger <- function(logger = "", level = 'INFO',
-                             log.file = NULL, reset.log = TRUE){
+util.init.logger <- function(logger = "", 
+                             level = 'INFO',
+                             log.file = NULL, 
+                             reset.log = TRUE){
 
   logReset()
 
@@ -32,12 +41,13 @@ util.init.logger <- function(logger = "", level = 'INFO',
 #' util.init.dir
 #'
 #' create a directory/file if it doesn't exist
-#'
+#' 
+#' @param path directory/file to be created 
 #' @examples
 #' util.init.dir('./tmp1/')
 #' util.init.dir('./tmp2/text.txt')
-#' unlink('tmp1', recursive = T)
-#' unlink('tmp2', recursive = T)
+#' unlink('tmp1', recursive = TRUE)
+#' unlink('tmp2', recursive = TRUE)
 #' @export
 util.init.dir <- function(path){
 
@@ -58,7 +68,8 @@ util.init.dir <- function(path){
 #' util.file.summ
 #'
 #' output the file summary from bash command `ls`
-#'
+#' @param dir directory to be summarized
+#' @return data.frame
 #' @export
 #' @examples
 #' util.file.summ('./')

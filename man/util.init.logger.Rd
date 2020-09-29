@@ -11,9 +11,21 @@ util.init.logger(
   reset.log = TRUE
 )
 }
+\arguments{
+\item{logger}{name of logger}
+
+\item{level}{The logging level of the root logger.}
+
+\item{log.file}{external path of log file}
+
+\item{reset.log}{boolean. TRUE -> reset logger}
+}
 \description{
 initiator for logger functions
 }
 \examples{
 util.init.logger()
+logging::loginfo('this is an info')
+logging::logwarn('this is a warning')
+logging::logerror('this is an error')
 }

@@ -19,6 +19,24 @@ util.vis.datatable(
 }
 \arguments{
 \item{df}{input data.frame}
+
+\item{type}{character, {'buttons','scroll-y'}}
+
+\item{dom}{character, a combined string to indicate table elements}
+
+\item{options}{list, extra options from `DT` js package}
+
+\item{scrollY}{int, number of pixels to the scrollable window}
+
+\item{rownames}{boolean, TRUE -> show rowname of table}
+
+\item{filter}{character, {'none','top','bottom'}, position of filter}
+
+\item{background.color}{character, header color}
+
+\item{pretty.header}{boolean, TRUE -> enable colored header}
+
+\item{...}{extra params from `datatable` function}
 }
 \value{
 rendered html table

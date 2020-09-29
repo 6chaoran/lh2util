@@ -13,6 +13,9 @@ util.text.wrap(x, wrap.len = 50, br = "<br>")
 
 \item{br}{line break separator}
 }
+\value{
+character
+}
 \description{
 add line break in text
 }
