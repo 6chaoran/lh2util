@@ -12,6 +12,7 @@ util.vis.kable(
   escape = F,
   caption = NULL,
   align = NULL,
+  align.left = 1L,
   digits = 1,
   position = "center",
   pretty.header = T,
@@ -32,6 +33,8 @@ util.vis.kable(
 \item{caption}{character, caption of the table}
 
 \item{align}{character, a combined string of text alignment. e.g. 'lcrr' for 4 columns}
+
+\item{align.left}{int, number of columns left aligned.}
 
 \item{digits}{int, number of decimal digits to keep}
 
