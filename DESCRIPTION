@@ -28,5 +28,10 @@ Imports:
     kableExtra,
     DT,
     data.table,
-    scales
+    scales,
+    progress,
+    tidyselect,
+    ggridges,
+    forcats,
+    ggpubr
 RoxygenNote: 7.1.1
