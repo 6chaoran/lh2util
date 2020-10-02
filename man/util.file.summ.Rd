@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-common.R
 \name{util.file.summ}
 \alias{util.file.summ}
-\title{util.file.summ}
+\title{tabulate the file summary from `ls` command}
 \usage{
 util.file.summ(dir)
 }

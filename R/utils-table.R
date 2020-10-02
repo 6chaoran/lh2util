@@ -6,7 +6,7 @@
 #' @importFrom dplyr mutate_if
 NULL
 
-#' util.text.wrap
+#' break long text
 #' 
 #' add line break in text
 #' 
@@ -31,7 +31,7 @@ util.text.wrap <- function(x, wrap.len = 50, br = '<br>'){
   paste(res, collapse = br)
 }
 
-#' util.vis.kable
+#' convert data.frame to kable-html table
 #' 
 #' visualize table using kable package
 #' 
@@ -108,7 +108,7 @@ util.vis.kable <- function(df, convert_pct = F,
   out
 }
 
-#' util.vis.datatable
+#' convert data.frame to DT-html table
 #' 
 #' visualize table using kable package
 #' 

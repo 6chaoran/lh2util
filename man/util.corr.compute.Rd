@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.corr.compute}
 \alias{util.corr.compute}
-\title{util.corr.compute}
+\title{compute pairwise correlation with p-value}
 \usage{
 util.corr.compute(data, fnames)
 }
@@ -15,7 +15,8 @@ util.corr.compute(data, fnames)
 data.frame
 }
 \description{
-compute pairwise correlation with p-value
+categorical variables are encoded to integers. (this is a big assumption)
+Pearson's correlation is used.
 }
 \examples{
 util.corr.compute(mtcars, c('am','gear','mpg'))

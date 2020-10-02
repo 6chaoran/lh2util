@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.theme.no.axis}
 \alias{util.theme.no.axis}
-\title{util.theme.no.axis}
+\title{Add-on theme without x/y axis}
 \usage{
 util.theme.no.axis(axis = "x")
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-table.R
 \name{util.text.wrap}
 \alias{util.text.wrap}
-\title{util.text.wrap}
+\title{break long text}
 \usage{
 util.text.wrap(x, wrap.len = 50, br = "<br>")
 }

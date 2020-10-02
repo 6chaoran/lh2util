@@ -6,7 +6,7 @@
 #' @importFrom tidyr unite
 NULL
 
-#' util.init.logger
+#' initialize logger function
 #'
 #' initiator for logger functions
 #'
@@ -38,9 +38,12 @@ util.init.logger <- function(logger = "",
 
 }
 
-#' util.init.dir
+#' initialize directories
 #'
-#' create a directory/file if it doesn't exist
+#' create a directory/file if it doesn't exist. 
+#' directory is required to end with "/" (e.g. ./temp/)
+#' when filename is provided, the parent directory will be created.
+#' (e.g. ./tmp/ will be created is ./tmp/test.csv is provided) 
 #' 
 #' @param path directory/file to be created 
 #' @examples
@@ -65,7 +68,7 @@ util.init.dir <- function(path){
   }
 }
 
-#' util.file.summ
+#' tabulate the file summary from `ls` command
 #'
 #' output the file summary from bash command `ls`
 #' @param dir directory to be summarized
@@ -90,7 +93,7 @@ util.file.summ <- function(dir){
   file.summ
 }
 
-#' util.lh2.fill
+#' default color code
 #' 
 #' default color code
 #' 

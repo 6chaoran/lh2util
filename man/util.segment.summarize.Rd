@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.segment.summarize}
 \alias{util.segment.summarize}
-\title{util.segment.summarize}
+\title{summarize segments with custom aggregation function}
 \usage{
 util.segment.summarize(
   data,

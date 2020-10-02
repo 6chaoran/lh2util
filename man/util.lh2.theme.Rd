@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.lh2.theme}
 \alias{util.lh2.theme}
-\title{util.lh2.theme}
+\title{The default theme of plots}
 \usage{
 util.lh2.theme(angle = 45, legend.position = "right", font.size = 12)
 }
@@ -17,7 +17,7 @@ util.lh2.theme(angle = 45, legend.position = "right", font.size = 12)
 a ggplot2 theme
 }
 \description{
-default theme
+default ggplot2 theme
 }
 \examples{
 library(ggplot2)

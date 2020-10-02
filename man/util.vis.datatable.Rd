@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-table.R
 \name{util.vis.datatable}
 \alias{util.vis.datatable}
-\title{util.vis.datatable}
+\title{convert data.frame to DT-html table}
 \usage{
 util.vis.datatable(
   df,

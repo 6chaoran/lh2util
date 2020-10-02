@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-table.R
 \name{util.vis.kable}
 \alias{util.vis.kable}
-\title{util.vis.kable}
+\title{convert data.frame to kable-html table}
 \usage{
 util.vis.kable(
   df,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-common.R
 \name{util.lh2.fill}
 \alias{util.lh2.fill}
-\title{util.lh2.fill}
+\title{default color code}
 \usage{
 util.lh2.fill()
 }

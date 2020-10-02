@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.corr.plot}
 \alias{util.corr.plot}
-\title{util.corr.plot}
+\title{plot pairwise correlation}
 \usage{
 util.corr.plot(out, title = "Pairwise Correlation Plot")
 }

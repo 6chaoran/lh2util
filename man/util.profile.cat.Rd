@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.profile.cat}
 \alias{util.profile.cat}
-\title{util.profile.cat}
+\title{stacked bar plot for single categorical variable}
 \usage{
 util.profile.cat(data, x, segment = "segment", alpha = 0.8)
 }

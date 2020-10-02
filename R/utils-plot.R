@@ -6,9 +6,9 @@
 #' @importFrom dplyr mutate group_by ungroup summarise lag n
 NULL
 
-#' util.lh2.theme
+#' The default theme of plots
 #' 
-#' default theme
+#' default ggplot2 theme
 #' 
 #' @param angle int, rotation of x.axis.text
 #' @param legend.position char, {'right','left','top','bottom','none'}
@@ -35,7 +35,7 @@ util.lh2.theme <- function(angle = 45, legend.position = 'right',
   
 }
 
-#' util.theme.no.axis
+#' Add-on theme without x/y axis
 #' 
 #' quick function to remove the x/y axis
 #' @param axis char, {'x','y'}
@@ -61,9 +61,9 @@ util.theme.no.axis <- function(axis = 'x'){
   }
 }
 
-#' util.plot.stack.bar
+#' visualize two categorical variables in stacked bars
 #' 
-#' plot stack bar with proprtion percentage for two categorical varaibles
+#' plot stack bar with proportion percentage for two categorical variables
 #' 
 #' @param df data.frame, input data
 #' @param x char, variable to plot for statistics
@@ -99,9 +99,10 @@ util.plot.stack.bar <- function(df, x, fill,
     scale_y_continuous(labels = scales::percent)
 }
 
-#' util.corr.compute
-#' 
 #' compute pairwise correlation with p-value
+#' 
+#' categorical variables are encoded to integers. (this is a big assumption)
+#' Pearson's correlation is used.
 #' 
 #' @importFrom tidyselect one_of
 #' @importFrom dplyr mutate_if bind_rows select pull arrange
@@ -163,7 +164,7 @@ util.corr.compute <- function(data, fnames){
 
 }
 
-#' util.corr.plot
+#' plot pairwise correlation
 #' 
 #' plot pairwise correlation, used together with `util.corr.compute`
 #' 
@@ -194,9 +195,9 @@ util.corr.plot <- function(out, title = 'Pairwise Correlation Plot'){
 }
 
 
-#' util.profile.num
+#' density plot for single numeric variable
 #' 
-#' profile the numeric variable by segment, used for segment profiling
+#' profile the numeric variable colored by segment, used for segment profiling
 #' 
 #' @param data input data.frame
 #' @param x numeric variable for profiling
@@ -249,7 +250,7 @@ util.profile.num <- function(data, x, segment = 'segment',
 
 }
 
-#' util.profile.cat
+#' stacked bar plot for single categorical variable
 #' 
 #' profile the numeric variable by segment, used for segment profiling
 #' 
@@ -316,9 +317,9 @@ util.profile.cat <- function(data, x, segment = 'segment',
 
 }
 
-#' util.profile.fnames
+#' density/stacked bar plots for both numeric/categorical variables 
 #' 
-#' profile both numeric and categorical varaibles
+#' profile both numeric (numeric type) and categorical (character or factor type) variables
 #' 
 #' @inheritParams util.profile.num
 #' @param data input data.frame
@@ -349,14 +350,17 @@ util.profile.fnames <- function(data, fnames, segment,
     pb$tick(tokens = list(what = glue("{fname}   ")))
 
     if(is.numeric(data[[fname]])){
-      res <- util.profile.num(data, fname, segment)
+      res <- util.profile.num(data, fname, segment,
+                              alpha = alpha,
+                              scale = scale)
       profiles.data[[fname]] <- res$data
       profiles.plot[[fname]] <- res$plot
     }
 
     if(is.character(data[[fname]]) |
        is.factor(data[[fname]])){
-      res <- util.profile.cat(data, fname, segment)
+      res <- util.profile.cat(data, fname, segment,
+                              alpha = alpha)
       profiles.data[[fname]] <- res$data
       profiles.plot[[fname]] <- res$plot
     }
@@ -365,7 +369,7 @@ util.profile.fnames <- function(data, fnames, segment,
   return(list(data = profiles.data, plot = profiles.plot))
 }
 
-#' util.segment.summarize
+#' summarize segments with custom aggregation function
 #' 
 #' summarize segments in tables
 #' 

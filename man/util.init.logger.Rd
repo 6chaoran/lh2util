@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-common.R
 \name{util.init.logger}
 \alias{util.init.logger}
-\title{util.init.logger}
+\title{initialize logger function}
 \usage{
 util.init.logger(
   logger = "",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.profile.fnames}
 \alias{util.profile.fnames}
-\title{util.profile.fnames}
+\title{density/stacked bar plots for both numeric/categorical variables}
 \usage{
 util.profile.fnames(data, fnames, segment, alpha = 0.8, scale = 1)
 }
@@ -21,7 +21,7 @@ util.profile.fnames(data, fnames, segment, alpha = 0.8, scale = 1)
 list(data, plot)
 }
 \description{
-profile both numeric and categorical varaibles
+profile both numeric (numeric type) and categorical (character or factor type) variables
 }
 \examples{
 mtcars['am'] <- factor(mtcars[['am']])

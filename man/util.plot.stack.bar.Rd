@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.plot.stack.bar}
 \alias{util.plot.stack.bar}
-\title{util.plot.stack.bar}
+\title{visualize two categorical variables in stacked bars}
 \usage{
 util.plot.stack.bar(df, x, fill, label.threshold = 0.1, ...)
 }
@@ -18,7 +18,7 @@ util.plot.stack.bar(df, x, fill, label.threshold = 0.1, ...)
 \item{...}{extra param for function `geom_bar`}
 }
 \description{
-plot stack bar with proprtion percentage for two categorical varaibles
+plot stack bar with proportion percentage for two categorical variables
 }
 \examples{
 mtcars['am'] <- as.factor(mtcars[['am']])

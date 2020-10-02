@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.profile.num}
 \alias{util.profile.num}
-\title{util.profile.num}
+\title{density plot for single numeric variable}
 \usage{
 util.profile.num(data, x, segment = "segment", alpha = 0.8, scale = 1)
 }
@@ -21,7 +21,7 @@ util.profile.num(data, x, segment = "segment", alpha = 0.8, scale = 1)
 list(data.frame, plot)
 }
 \description{
-profile the numeric variable by segment, used for segment profiling
+profile the numeric variable colored by segment, used for segment profiling
 }
 \examples{
 res <- util.profile.num(mtcars, x = 'wt', segment = 'am')

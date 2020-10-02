@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-common.R
 \name{util.init.dir}
 \alias{util.init.dir}
-\title{util.init.dir}
+\title{initialize directories}
 \usage{
 util.init.dir(path)
 }
@@ -10,7 +10,10 @@ util.init.dir(path)
 \item{path}{directory/file to be created}
 }
 \description{
-create a directory/file if it doesn't exist
+create a directory/file if it doesn't exist. 
+directory is required to end with "/" (e.g. ./temp/)
+when filename is provided, the parent directory will be created.
+(e.g. ./tmp/ will be created is ./tmp/test.csv is provided)
 }
 \examples{
 util.init.dir('./tmp1/')
