@@ -42,6 +42,7 @@ util.text.wrap <- function(x, wrap.len = 50, br = '<br>'){
 #' @param escape boolean, TRUE escape html tags
 #' @param caption character, caption of the table
 #' @param align character, a combined string of text alignment. e.g. 'lcrr' for 4 columns
+#' @param align.left int, number of columns left aligned.
 #' @param digits int, number of decimal digits to keep
 #' @param position {'left','right','float_left','center'}
 #' @param pretty.header boolean, TRUE -> colored header
@@ -56,6 +57,7 @@ util.vis.kable <- function(df, convert_pct = F,
                            escape = F,
                            caption = NULL,
                            align = NULL,
+                           align.left = 1L,
                            digits = 1,
                            position = 'center',
                            pretty.header = T,
@@ -73,13 +75,19 @@ util.vis.kable <- function(df, convert_pct = F,
     }
     res
   }
+  
+  if (is.null(align)) {
+    align <-
+      paste(c(rep('l', align.left), rep('r', ncol(df) - align.left)), 
+            collapse = '')
+  }
 
-  if(convert_pct){
+  if (convert_pct) {
     df <- df %>%
-      mutate_if(is.percentage, function(i){
-          scales::percent(i, accuracy = accuracy)
-        })
-    }
+      mutate_if(is.percentage, function(i) {
+        scales::percent(i, accuracy = accuracy)
+      })
+  }
 
   out <- df %>%
     kable('html',
