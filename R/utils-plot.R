@@ -329,8 +329,8 @@ util.profile.cat <- function(data, x, segment = 'segment',
 #' @examples 
 #' mtcars['am'] <- factor(mtcars[['am']])
 #' res <- util.profile.fnames(mtcars, c('am','wt'), segment = 'gear')
-#' library(ggpubr)
-#' ggarrange(plotlist = res$plot, ncol = 2 , nrow = 1, common.legend = TRUE)
+#' library(patchwork)
+#' wrap_plots(res$plot) + plot_layout(guides = 'collect')
 
 util.profile.fnames <- function(data, fnames, segment,
                                 alpha = 0.8, 

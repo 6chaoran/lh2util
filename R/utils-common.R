@@ -97,10 +97,26 @@ util.file.summ <- function(dir){
 #' 
 #' default color code
 #' 
+#' @importFrom dplyr case_when
+#' @param code either int or string. \cr
+#' 1,'red \cr
+#' 2,'orange' \cr
+#' 3,'yellow' \cr
+#' 4,'lightgreen' \cr
+#' 5,'green' \cr
+#' anything else, default color \cr
 #' @return color code
 #' @export
 #' @examples 
 #' util.lh2.fill()
-util.lh2.fill <- function(){
-  '#008B8B'
+util.lh2.fill <- function(code = NA) {
+  case_when(
+    is.na(code) ~ '#008B8B',
+    code == 'red' | code == 1 ~ '#cc3232',
+    code == 'orange' | code == 2 ~ '#db7b2b',
+    code == 'yellow' | code == 3 ~ '#e7b416',
+    code == 'lightgreen' | code == 4 ~ '#99c140',
+    code == 'green' | code == 5 ~ '#2dc937',
+    TRUE ~ '#008B8B'
+  )
 }

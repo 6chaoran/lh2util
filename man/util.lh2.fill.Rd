@@ -4,7 +4,16 @@
 \alias{util.lh2.fill}
 \title{default color code}
 \usage{
-util.lh2.fill()
+util.lh2.fill(code = NA)
+}
+\arguments{
+\item{code}{either int or string. \cr
+1,'red \cr
+2,'orange' \cr
+3,'yellow' \cr
+4,'lightgreen' \cr
+5,'green' \cr
+anything else, default color \cr}
 }
 \value{
 color code
