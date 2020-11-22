@@ -13,6 +13,8 @@ NULL
 #' @param angle int, rotation of x.axis.text
 #' @param legend.position char, {'right','left','top','bottom','none'}
 #' @param font.size int font size of text
+#' @param skip.axis char, {'x','y'}, skip style setting for x,y axis
+#' @param only.axis char, {'x','y'}, only do style setting for x,y axis
 #' @return a ggplot2 theme
 #' @export
 #' @examples 
@@ -20,19 +22,79 @@ NULL
 #' ggplot(mtcars, aes(mpg, wt)) + 
 #'   geom_point() + 
 #'   util.lh2.theme()
-util.lh2.theme <- function(angle = 45, legend.position = 'right',
-                           font.size = 12){
-  theme(
-    panel.background = element_rect(fill = "white", colour = "grey",size = 1, linetype = "solid"),
-    plot.title = element_text(color = 'black', size = font.size + 2, face = 'bold'),
-    axis.title.x = element_text(color = 'black', size = font.size + 1, face = 'bold'),
-    axis.title.y = element_text(color = 'black', size = font.size + 1, face = 'bold'),
-    axis.text.x = element_text(size = font.size, angle = angle, hjust = 1),
-    axis.text.y = element_text(size = font.size),
-    panel.grid.minor = element_line(size = (0.2), colour="grey"),
-    panel.grid.major = element_line(size = (0.2), colour="grey"),
-    legend.position = legend.position)
+util.lh2.theme <- function(angle = 45,
+                           legend.position = 'right',
+                           font.size = 12,
+                           skip.axis = '',
+                           only.axis = '') {
   
+  panel.background <- element_rect(
+    fill = "white",
+    colour = "grey",
+    size = 1,
+    linetype = "solid"
+  )
+  plot.title <- element_text(color = 'black',
+                             size = font.size + 2,
+                             face = 'bold')
+  axis.title.y <- element_text(color = 'black',
+                               size = font.size + 1,
+                               face = 'bold')
+  axis.text.y <- element_text(size = font.size)
+  axis.title.x <-
+    element_text(color = 'black',
+                 size = font.size + 1,
+                 face = 'bold')
+  axis.text.x <-
+    element_text(size = font.size,
+                 angle = angle,
+                 hjust = 1)
+  panel.grid.minor <- element_line(size = (0.2), colour = "grey")
+  panel.grid.major <- element_line(size = (0.2), colour = "grey")
+  
+  if (skip.axis == 'x') {
+    theme(
+      panel.background = panel.background,
+      plot.title = plot.title,
+      axis.title.y = axis.title.y,
+      axis.text.y = axis.text.y,
+      panel.grid.minor = panel.grid.minor,
+      panel.grid.major = panel.grid.major,
+      legend.position = legend.position
+    )
+  } else if (skip.axis == 'y') {
+    theme(
+      panel.background = panel.background,
+      plot.title = plot.title,
+      axis.title.x = axis.title.x,
+      axis.text.x = axis.text.x,
+      panel.grid.minor = panel.grid.minor,
+      panel.grid.major = panel.grid.major,
+      legend.position = legend.position
+    )
+  } else if (only.axis == 'x') {
+    theme(
+      axis.title.x = axis.title.x,
+      axis.text.x = axis.text.x
+    )
+  } else if (only.axis == 'y') {
+    theme(
+      axis.title.y = axis.title.y,
+      axis.text.y = axis.text.y
+    )
+  } else {
+    theme(
+      panel.background = panel.background,
+      plot.title = plot.title,
+      axis.title.x = axis.title.x,
+      axis.title.y = axis.title.y,
+      axis.text.x = axis.text.x,
+      axis.text.y = axis.text.y,
+      panel.grid.minor = panel.grid.minor,
+      panel.grid.major = panel.grid.major,
+      legend.position = legend.position
+    )
+  }
 }
 
 #' Add-on theme without x/y axis
@@ -47,17 +109,25 @@ util.lh2.theme <- function(angle = 45, legend.position = 'right',
 #'   geom_point() + 
 #'   util.lh2.theme() +
 #'   util.theme.no.axis('x')
-util.theme.no.axis <- function(axis = 'x'){
-  if (axis == 'x'){
-    theme(axis.text.x = element_blank(),
-          axis.ticks.x = element_blank(),
-          axis.title.x = element_blank())
+util.theme.no.axis <- function(axis = 'x') {
+  if (axis == 'x') {
+    return(
+      theme(
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()
+      )
+    )
   }
   
-  if (axis == 'y'){
-    theme(axis.text.y = element_blank(),
-          axis.ticks.y = element_blank(),
-          axis.title.y = element_blank())
+  if (axis == 'y') {
+    return(
+      theme(
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank()
+      )
+    )
   }
 }
 
@@ -98,6 +168,127 @@ util.plot.stack.bar <- function(df, x, fill,
     labs(x = x, fill = fill, y = '') +
     scale_y_continuous(labels = scales::percent)
 }
+
+#' compute pairwise correlation with p-value
+#' 
+#' categorical variables are encoded to integers. (this is a big assumption)
+#' Pearson's correlation is used.
+#' 
+#' @importFrom ggplot2 coord_flip theme
+#' @importFrom patchwork wrap_plots plot_annotation plot_layout
+#' @param ... ggplot objects
+#' @param shared.axis {'x', 'y'},  defaults to 'y'
+#' @param plots.theme ggplot theme, defaults to \code{util.lh2.theme}
+#' @param plots.coord ggplot coord, defaults to \code{coord_flip}
+#' @param title str, plot global title
+#' @param subtitle str, plot global subtitle
+#' @param caption str, plot global caption
+#' @param nrow int, number of rows of the layout
+#' @param ncol int, number of ncols of the layout
+#' @param legend.position {'right','left','bottom','top'}
+#' @return ggplot
+#' @export
+#' @examples 
+#' library(ggplot2)
+#' library(dplyr)
+#' library(patchwork)
+#' 
+#' p1 <- mtcars %>%
+#'   mutate(gear = factor(gear), am = factor(am)) %>%
+#'   util.plot.stack.bar('gear','am') +
+#'   labs(title = 'p1')
+#' p2 <- mtcars %>%
+#'   mutate(am = factor(gear)) %>%
+#'   group_by(am) %>%
+#'   summarise(n = n()) %>%
+#'   ggplot(aes(x = am, y = n)) +
+#'   geom_bar(stat = 'identity', fill = util.lh2.fill('orange'))+
+#'   labs(title = 'p2')
+#'   
+#' util.plots.share.axis(p1, p2, 
+#'   title = 'Shared Axis Plot')
+util.plots.share.axis <- function(..., 
+                                  shared.axis = 'y', 
+                                  plots.theme = NULL, 
+                                  plots.coord = NULL,
+                                  title = NULL,
+                                  subtitle = NULL,
+                                  caption = NULL,
+                                  nrow = NULL,
+                                  ncol = NULL,
+                                  legend.position = 'bottom'){
+  
+  if((!shared.axis %in% c('x','y')) & (is.null(nrow) | is.null(ncol))){
+    stop('[shared.axis] should be "x" or "y", otherwise [nrow] & [ncol] are required.')
+  }
+  if((!is.null(nrow) & !is.null(ncol) & shared.axis %in% c('x','y'))){
+    message(glue('[nrow], [ncol] overides [shared.axis] parameter.'))
+  }
+  
+  plots <- list(...)
+  len <- length(plots)
+  
+  if (is.null(plots.theme))
+    plots.theme <- util.lh2.theme
+  
+  if (is.null(plots.coord))
+    plots.coord <- coord_flip
+  
+  if (!is.null(nrow) & !is.null(ncol)) shared.axis <- ''
+  
+  if (shared.axis == 'y') {
+    nrow <- 1
+    ncol <- len
+  }
+  if (shared.axis == 'x') {
+    nrow <- len
+    ncol <- 1
+  }
+  
+  # chart with axis
+  axis.chart.index <- ifelse(shared.axis == 'y', 1, len)
+  for (i in seq(len)) {
+    row.id <- floor((i - 1) / ncol) + 1  
+    col.id <- (i - 1) %% ncol + 1
+
+    if (col.id == 1) {
+      # left most column
+      if (row.id == nrow) {
+        plots[[i]] <- plots[[i]] + 
+          plots.theme()
+      } else {
+        plots[[i]] <- plots[[i]] + 
+          plots.theme() + 
+          util.theme.no.axis(axis = 'x')
+      }
+    } else if (row.id == nrow) {
+      # bottom row
+      plots[[i]] <-
+        plots[[i]] + plots.theme() + 
+        util.theme.no.axis(axis = 'y')
+    } else {
+      plots[[i]] <-
+        plots[[i]] + plots.theme() + 
+        util.theme.no.axis(axis = 'x') + 
+        util.theme.no.axis(axis = 'y')
+    }
+  }
+  
+  p <- (
+    wrap_plots(plots, nrow = nrow, ncol = ncol) +
+      plot_layout(guides = 'collect') &
+      plots.coord(expand = F)
+  )
+  
+  p <-
+    p + plot_annotation(title = title,
+                        subtitle = subtitle,
+                        caption = caption) &
+    theme(legend.position = legend.position)
+  
+  return(p)
+}
+
 
 #' compute pairwise correlation with p-value
 #' 

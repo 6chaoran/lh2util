@@ -4,7 +4,13 @@
 \alias{util.lh2.theme}
 \title{The default theme of plots}
 \usage{
-util.lh2.theme(angle = 45, legend.position = "right", font.size = 12)
+util.lh2.theme(
+  angle = 45,
+  legend.position = "right",
+  font.size = 12,
+  skip.axis = "",
+  only.axis = ""
+)
 }
 \arguments{
 \item{angle}{int, rotation of x.axis.text}
@@ -12,6 +18,10 @@ util.lh2.theme(angle = 45, legend.position = "right", font.size = 12)
 \item{legend.position}{char, {'right','left','top','bottom','none'}}
 
 \item{font.size}{int font size of text}
+
+\item{skip.axis}{char, {'x','y'}, skip style setting for x,y axis}
+
+\item{only.axis}{char, {'x','y'}, only do style setting for x,y axis}
 }
 \value{
 a ggplot2 theme
