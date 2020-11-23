@@ -287,7 +287,8 @@ util.plots.share.axis <- function(...,
   
   p <- p + plot_annotation(title = title,
                            subtitle = subtitle,
-                           caption = caption) &
+                           caption = caption, 
+                           theme = plots.theme()) &
     theme(legend.position = legend.position)
   
   return(p)
