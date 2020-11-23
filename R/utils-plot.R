@@ -169,10 +169,11 @@ util.plot.stack.bar <- function(df, x, fill,
     scale_y_continuous(labels = scales::percent)
 }
 
-#' compute pairwise correlation with p-value
+#' combine plots and share axis
 #' 
-#' categorical variables are encoded to integers. (this is a big assumption)
-#' Pearson's correlation is used.
+#' modify plots by hiding x/y axes if shared x/y axis is used, plots combination
+#' is done by \code{patchwork} package. \cr
+#' plotlist can also be output by setting \code{return.plots = TRUE}.
 #' 
 #' @importFrom ggplot2 coord_flip theme
 #' @importFrom patchwork wrap_plots plot_annotation plot_layout
@@ -186,6 +187,7 @@ util.plot.stack.bar <- function(df, x, fill,
 #' @param nrow int, number of rows of the layout
 #' @param ncol int, number of ncols of the layout
 #' @param legend.position {'right','left','bottom','top'}
+#' @param return.plots if TRUE -> return list of plots only, defaults to FALSE
 #' @return ggplot
 #' @export
 #' @examples 
@@ -216,7 +218,8 @@ util.plots.share.axis <- function(...,
                                   caption = NULL,
                                   nrow = NULL,
                                   ncol = NULL,
-                                  legend.position = 'bottom'){
+                                  legend.position = 'bottom',
+                                  return.plots = FALSE){
   
   if((!shared.axis %in% c('x','y')) & (is.null(nrow) | is.null(ncol))){
     stop('[shared.axis] should be "x" or "y", otherwise [nrow] & [ncol] are required.')
@@ -230,9 +233,6 @@ util.plots.share.axis <- function(...,
   
   if (is.null(plots.theme))
     plots.theme <- util.lh2.theme
-  
-  if (is.null(plots.coord))
-    plots.coord <- coord_flip
   
   if (!is.null(nrow) & !is.null(ncol)) shared.axis <- ''
   
@@ -274,16 +274,20 @@ util.plots.share.axis <- function(...,
     }
   }
   
+  if(return.plots) return(plots)
+  
   p <- (
     wrap_plots(plots, nrow = nrow, ncol = ncol) +
-      plot_layout(guides = 'collect') &
-      plots.coord(expand = F)
+      plot_layout(guides = 'collect')
   )
   
-  p <-
-    p + plot_annotation(title = title,
-                        subtitle = subtitle,
-                        caption = caption) &
+  if(!is.null(plots.coord)){
+    p <- p & plots.coord(expand = F)
+  }
+  
+  p <- p + plot_annotation(title = title,
+                           subtitle = subtitle,
+                           caption = caption) &
     theme(legend.position = legend.position)
   
   return(p)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-plot.R
 \name{util.plots.share.axis}
 \alias{util.plots.share.axis}
-\title{compute pairwise correlation with p-value}
+\title{combine plots and share axis}
 \usage{
 util.plots.share.axis(
   ...,
@@ -14,7 +14,8 @@ util.plots.share.axis(
   caption = NULL,
   nrow = NULL,
   ncol = NULL,
-  legend.position = "bottom"
+  legend.position = "bottom",
+  return.plots = FALSE
 )
 }
 \arguments{
@@ -37,13 +38,16 @@ util.plots.share.axis(
 \item{ncol}{int, number of ncols of the layout}
 
 \item{legend.position}{{'right','left','bottom','top'}}
+
+\item{return.plots}{if TRUE -> return list of plots only, defaults to FALSE}
 }
 \value{
 ggplot
 }
 \description{
-categorical variables are encoded to integers. (this is a big assumption)
-Pearson's correlation is used.
+modify plots by hiding x/y axes if shared x/y axis is used, plots combination
+is done by \code{patchwork} package. \cr
+plotlist can also be output by setting \code{return.plots = TRUE}.
 }
 \examples{
 library(ggplot2)
